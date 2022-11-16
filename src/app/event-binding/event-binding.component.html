@@ -1,0 +1,13 @@
+<p>event-binding works!</p>
+<!-- <button type="button" class="btn btn-primary" (click)="message='Hello World'" >Test</button> -->
+<button type="button" class="btn btn-primary" (click)="buttonClicked()" >Test</button>
+
+<div class="form-group">
+  <label for=""></label>
+  <input type="text" class="form-control" (keyup)="keyUpCalled($event)" aria-describedby="helpId" placeholder="">
+  <small id="helpId" class="form-text text-muted">Help text</small>
+</div>
+
+<div class="alert alert-primary" role="alert">
+    <strong>{{message}}</strong>
+</div>

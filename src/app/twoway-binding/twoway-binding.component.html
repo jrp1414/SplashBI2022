@@ -1,0 +1,33 @@
+<h3>One way binding limitations</h3>
+
+<div class="row">
+    <div class="col-md-4">
+          <div class="form-group">            
+            <input type="text" class="form-control" (keyup)="onewayKeyUp($event)" aria-describedby="helpId" placeholder=""><small id="helpId" class="form-text text-muted">Help text</small>
+          </div>      
+    </div>
+    <div class="col-md-4">
+        {{oneWayMessage}}
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary" (click)="onewayTest()">One Way ex</button>
+    </div>
+</div>
+
+<h3>Two way binding Advantage</h3>
+
+<div class="row">
+    <div class="col-md-4">
+          <div class="form-group">            
+            <!-- <input type="text" class="form-control" [(ngModel)]="twowayMessage" aria-describedby="helpId" placeholder=""><small id="helpId" class="form-text text-muted">Help text</small> -->
+
+            <input type="text" class="form-control" [ngModel]="twowayMessage" (ngModelChange)="twowayChange($event)" aria-describedby="helpId" placeholder=""><small id="helpId" class="form-text text-muted">Help text</small>
+          </div>      
+    </div>
+    <div class="col-md-4">
+        {{twowayMessage}}
+    </div>
+    <div class="col-md-4">
+        <button type="button" class="btn btn-primary" (click)="twowayTest()">Two Way ex</button>
+    </div>
+</div>
