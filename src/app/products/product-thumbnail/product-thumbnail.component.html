@@ -1,0 +1,18 @@
+<div class="card">
+    <img class="card-img-top" width="100px" height="100px" [src]="product.imageurl" alt="">
+    <div class="card-body">
+        <h4 class="card-title">{{product.title}}</h4>
+        <p class="card-text">{{product.description}}</p>
+        <p>Price : {{product.price}} <span *ngIf="product.price>25">Expensive</span></p>
+        <!-- <p>Price : {{product.price}} <span [hidden]="product.price<25">Expensive</span></p> -->
+
+        <p [ngSwitch]="product.rating">
+            <span *ngSwitchCase="1">Very Good</span>
+            <span *ngSwitchCase="2">Good</span>
+            <span *ngSwitchCase="3">Average</span>
+            <span *ngSwitchCase="4">Bad</span>
+            <span *ngSwitchCase="5">Very Bad</span>
+            <span *ngSwitchDefault>NA</span>
+        </p>
+    </div>
+</div>
