@@ -9,6 +9,7 @@ import { TwowayBindingComponent } from './twoway-binding/twoway-binding.componen
 import { FormsModule } from '@angular/forms';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductThumbnailComponent } from './products/product-thumbnail/product-thumbnail.component';
+import { PrimengModule } from './ui-libs/primeng.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProductThumbnailComponent } from './products/product-thumbnail/product-
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    PrimengModule
   ],
   providers: [],
   bootstrap: [AppComponent]

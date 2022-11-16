@@ -9,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ProductThumbnailComponent implements OnInit {
   @Input() product:any;
   constructor() { }
-
+  currentDate:Date = new Date();
   ngOnInit(): void {
   }
 
