@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductThumbnailComponent } from './products/product-thumbnail/product-thumbnail.component';
 import { PrimengModule } from './ui-libs/primeng.module';
+import { ShortenPipe } from './shared/shorten.pipe';
+import { FilterPipe } from './shared/filter.pipe';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { PrimengModule } from './ui-libs/primeng.module';
     EventBindingComponent,
     TwowayBindingComponent,
     ProductListComponent,
-    ProductThumbnailComponent
+    ProductThumbnailComponent,
+    ShortenPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'product-thumbnail',
@@ -7,10 +7,15 @@ import { Component, Input, OnInit } from '@angular/core';
   ]
 })
 export class ProductThumbnailComponent implements OnInit {
-  @Input() product:any;
+  @Input("p") product:any;
+  @Output("sd") send:EventEmitter<string> = new EventEmitter(); 
   constructor() { }
   currentDate:Date = new Date();
   ngOnInit(): void {
+  }
+
+  SendToParent(product:any){
+    this.send.emit(product.title);
   }
 
 }

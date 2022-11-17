@@ -1,6 +1,14 @@
 <h3>Products List</h3>
 <div class="row">
-    <div style="margin-top: 5px;" *ngFor="let prod of productsList" class="col-md-3">
-        <product-thumbnail [product]="prod"></product-thumbnail>
+    <div class="col-md-1">
+        Filter: 
+    </div>
+    <div class="col-md-2">
+        <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Filter">
+    </div>
+</div>
+<div class="row">
+    <div style="margin-top: 5px;" *ngFor="let prod of productsList | filter : filterText" class="col-md-3">
+        <product-thumbnail [p]="prod" (sd)="received($event)"></product-thumbnail>
     </div>
 </div>

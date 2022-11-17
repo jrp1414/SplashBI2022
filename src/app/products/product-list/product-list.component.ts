@@ -9,9 +9,14 @@ import { products } from '../products';
 })
 export class ProductListComponent implements OnInit {
   productsList:any[]=products;
+  filterText:string="";
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  received(data:any){
+    console.log(data);
   }
 
 }
