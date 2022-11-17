@@ -19,4 +19,8 @@ export class ProductListComponent implements OnInit {
     console.log(data);
   }
 
+  AddProd(){
+    
+  }
+
 }

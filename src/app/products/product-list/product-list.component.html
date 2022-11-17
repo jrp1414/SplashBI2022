@@ -6,9 +6,13 @@
     <div class="col-md-2">
         <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Filter">
     </div>
+
+    <div class="col-md-2">
+        <button type="button" (click)="AddProd()" class="btn btn-primary">Add Product</button>
+    </div>
 </div>
 <div class="row">
-    <div style="margin-top: 5px;" *ngFor="let prod of productsList | filter : filterText" class="col-md-3">
+    <div style="margin-top: 5px;" *ngFor="let prod of productsList | filter : filterText : 'title': 'description'" class="col-md-3">
         <product-thumbnail [p]="prod" (sd)="received($event)"></product-thumbnail>
     </div>
 </div>
