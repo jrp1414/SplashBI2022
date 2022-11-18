@@ -12,6 +12,8 @@ import { ProductThumbnailComponent } from './products/product-thumbnail/product-
 import { PrimengModule } from './ui-libs/primeng.module';
 import { ShortenPipe } from './shared/shorten.pipe';
 import { FilterPipe } from './shared/filter.pipe';
+import { BasicHighlightDirective } from './shared/basic-highlight.directive';
+import { BetterHighlightDirective } from './shared/better-highlight.directive';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FilterPipe } from './shared/filter.pipe';
     ProductListComponent,
     ProductThumbnailComponent,
     ShortenPipe,
-    FilterPipe
+    FilterPipe,
+    BasicHighlightDirective,
+    BetterHighlightDirective
   ],
   imports: [
     BrowserModule,

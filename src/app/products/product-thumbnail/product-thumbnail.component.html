@@ -1,9 +1,14 @@
 <div class="card">
     <img class="card-img-top" width="100px" height="100px" [src]="product.imageurl" alt="">
     <div class="card-body">
-        <h4 class="card-title">{{product.title | uppercase | shorten }}</h4>
+        <!-- <h4 class="card-title" [style]="{'background-color': product.rating<3?'red':'green', color:product.rating<3?'white':'yellow'}">{{product.title | uppercase | shorten }}</h4> -->
+        <h4 class="card-title" [style]="getStyles(product)">{{product.title | uppercase | shorten }}</h4>
+        <!-- <h4 class="card-title" [class]="product.rating<3?'red':'green'">{{product.title | uppercase | shorten }}</h4> -->
+        <!-- <h4 class="card-title" [ngStyle]="{backgroundColor:product.rating<3?'pink':'aqua',color:product.rating<3?'green':'blue'}">{{product.title | uppercase | shorten }}</h4> -->
+        <!-- <h4 class="card-title" [ngStyle]="getStyles(product)">{{product.title | uppercase | shorten }}</h4> -->
+        <!-- <h4 class="card-title" [ngClass]="getClases(product)">{{product.title | uppercase | shorten }}</h4> -->
         <p class="card-text">{{product.description | lowercase | shorten}}</p>
-        <p>Price : {{product.price | currency : 'GBP' : 'symbol' : '2.0-0'}} <span *ngIf="product.price>25">Expensive</span></p>
+        <p>Price : {{product.price | currency : 'GBP' : 'symbol' : '2.0-0'}}</p>
         <!-- <p>Price : {{product.price}} <span [hidden]="product.price<25">Expensive</span></p> -->
         
         <p>{{currentDate | date : 'dd/MM/yyyy' }}</p>
