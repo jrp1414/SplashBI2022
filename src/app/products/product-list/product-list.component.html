@@ -9,7 +9,19 @@
     <div class="col-md-2">
         <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Filter">
     </div>
-
+    <div class="col-md-2" *ngIf="filterText.length>0 else noFilter">
+        <div class="alert alert-primary" role="alert">
+            <strong>{{filterText}}</strong>
+        </div>
+    </div>
+    <ng-template #noFilter>
+        <div class="col-md-2">
+            <div class="alert alert-warning" role="alert">
+                <strong>No Filter added</strong>
+            </div>
+        </div>
+        
+    </ng-template>
     <div class="col-md-2">
         <button type="button" (click)="AddProd()" class="btn btn-primary">Add Product</button>
     </div>

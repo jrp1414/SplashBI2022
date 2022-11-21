@@ -11,9 +11,13 @@
         <p>Price : {{product.price | currency : 'GBP' : 'symbol' : '2.0-0'}}</p>
         <!-- <p>Price : {{product.price}} <span [hidden]="product.price<25">Expensive</span></p> -->
         
-        <p>{{currentDate | date : 'dd/MM/yyyy' }}</p>
+        <!-- <p>{{currentDate | date : 'dd/MM/yyyy' }}</p> -->
 
         <p-rating [ngModel]="product.rating" [readonly]="true" [stars]="5" [cancel]="false"></p-rating>
-        <button type="button" (click)="SendToParent(product)" class="btn btn-primary">Send To Parent</button>
+        <!-- <button type="button" *ngIf="product.availibility" (click)="SendToParent(product)" class="btn btn-primary">Send To Parent</button> -->
+        <button type="button" *unless="!product.availibility" (click)="SendToParent(product)" class="btn btn-primary">Send To Parent</button>
+        <!-- <ng-template [ngIf]="product.availibility">
+            <button type="button" (click)="SendToParent(product)" class="btn btn-primary">Send To Parent</button>
+        </ng-template> -->
     </div>
 </div>

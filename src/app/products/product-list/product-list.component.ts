@@ -1,18 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggerService } from 'src/app/shared/logger.service';
+import { ProductService } from 'src/app/shared/product.service';
 import { products } from '../products';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styles: [
-  ]
+  ],
+  // providers:[
+  //  ProductService 
+  // ]
 })
 export class ProductListComponent implements OnInit {
   productsList:any[]=products;
   filterText:string="";
-  constructor() { }
+  constructor(private ps:ProductService, private logger:LoggerService) { }
 
   ngOnInit(): void {
+    this.ps.sendData.subscribe((data:string)=>{
+      this.logger.log(`Recevied in Products List:  ${data}`);
+    });
   }
 
   received(data:any){

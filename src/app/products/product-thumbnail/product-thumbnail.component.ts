@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { LoggerService } from 'src/app/shared/logger.service';
+import { ProductService } from 'src/app/shared/product.service';
 
 @Component({
   selector: 'product-thumbnail',
@@ -24,13 +26,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class ProductThumbnailComponent implements OnInit {
   @Input("p") product: any;
   @Output("sd") send: EventEmitter<string> = new EventEmitter();
-  constructor() { }
+  // logger:LoggerService = new LoggerService();
+  constructor(private logger:LoggerService,private ps:ProductService) { 
+
+  }
   currentDate: Date = new Date();
   ngOnInit(): void {
   }
 
   SendToParent(product: any) {
-    this.send.emit(product.title);
+    // this.logger.log(`Sending ${product.title} to Parent`);
+    this.ps.sendData.emit(product.title);
+    // this.send.emit(product.title);
   }
 
   getStyles(product: any) {

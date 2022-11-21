@@ -14,6 +14,8 @@ import { ShortenPipe } from './shared/shorten.pipe';
 import { FilterPipe } from './shared/filter.pipe';
 import { BasicHighlightDirective } from './shared/basic-highlight.directive';
 import { BetterHighlightDirective } from './shared/better-highlight.directive';
+import { UnlessDirective } from './shared/unless.directive';
+import { LoggerService } from './shared/logger.service';
 
 
 @NgModule({
@@ -28,14 +30,17 @@ import { BetterHighlightDirective } from './shared/better-highlight.directive';
     ShortenPipe,
     FilterPipe,
     BasicHighlightDirective,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    UnlessDirective
   ],
   imports: [
     BrowserModule,
     FormsModule,
     PrimengModule
   ],
-  providers: [],
+  providers: [
+    LoggerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
