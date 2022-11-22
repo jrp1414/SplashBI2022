@@ -21,9 +21,9 @@ import { ProductService } from './shared/product.service';
     "./app.component.css",
     "./app2.component.css"
   ],
-  providers: [
-    ProductService
-  ]
+  // providers: [
+  //   ProductService
+  // ]
 })
 export class AppComponent {
   title = 'SplashBI2022';

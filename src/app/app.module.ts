@@ -16,6 +16,19 @@ import { BasicHighlightDirective } from './shared/basic-highlight.directive';
 import { BetterHighlightDirective } from './shared/better-highlight.directive';
 import { UnlessDirective } from './shared/unless.directive';
 import { LoggerService } from './shared/logger.service';
+import { ProductService } from './shared/product.service';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { MenuComponent } from './menu/menu.component';
+
+const routes:Routes = [
+  {path:'products',component: ProductListComponent },
+  {path:'product-details/:pid/:title',component: ProductDetailsComponent },
+  {path:'string-interpolation', component: StringInterpolationComponent},
+  {path:'property-binding', component: PropertyBindingComponent},
+  {path:'event-binding', component:EventBindingComponent}, 
+  {path:'twoway-binding', component:TwowayBindingComponent}
+];
 
 
 @NgModule({
@@ -31,15 +44,19 @@ import { LoggerService } from './shared/logger.service';
     FilterPipe,
     BasicHighlightDirective,
     BetterHighlightDirective,
-    UnlessDirective
+    UnlessDirective,
+    ProductDetailsComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    PrimengModule
+    PrimengModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     LoggerService
+    // ProductService
   ],
   bootstrap: [AppComponent]
 })

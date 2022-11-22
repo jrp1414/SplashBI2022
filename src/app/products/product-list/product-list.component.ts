@@ -13,11 +13,12 @@ import { products } from '../products';
   // ]
 })
 export class ProductListComponent implements OnInit {
-  productsList:any[]=products;
+  productsList:any[]=[];
   filterText:string="";
   constructor(private ps:ProductService, private logger:LoggerService) { }
 
   ngOnInit(): void {
+    this.productsList = this.ps.getProducts();    
     this.ps.sendData.subscribe((data:string)=>{
       this.logger.log(`Recevied in Products List:  ${data}`);
     });
