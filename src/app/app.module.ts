@@ -20,14 +20,17 @@ import { ProductService } from './shared/product.service';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { MenuComponent } from './menu/menu.component';
+import { ErrorComponent } from './error/error.component';
+import { ProductGuardService } from './shared/product-guard.service';
 
 const routes:Routes = [
   {path:'products',component: ProductListComponent },
-  {path:'product-details/:pid/:title',component: ProductDetailsComponent },
+  {path:'product-details/:pid',component: ProductDetailsComponent, canActivate:[ProductGuardService] },
   {path:'string-interpolation', component: StringInterpolationComponent},
   {path:'property-binding', component: PropertyBindingComponent},
   {path:'event-binding', component:EventBindingComponent}, 
-  {path:'twoway-binding', component:TwowayBindingComponent}
+  {path:'twoway-binding', component:TwowayBindingComponent},
+  {path:'error', component:ErrorComponent}
 ];
 
 
@@ -46,7 +49,8 @@ const routes:Routes = [
     BetterHighlightDirective,
     UnlessDirective,
     ProductDetailsComponent,
-    MenuComponent
+    MenuComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

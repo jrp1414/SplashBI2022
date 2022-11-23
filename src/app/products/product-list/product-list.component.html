@@ -28,6 +28,6 @@
 </div> -->
 <div class="row">
     <div style="margin-top: 5px;" *ngFor="let prod of productsList | filter : filterText : 'title': 'description'" class="col-md-3">
-        <product-thumbnail [routerLink]="['/product-details',prod.id,prod.title]" [p]="prod" (sd)="received($event)"></product-thumbnail>
+        <product-thumbnail [routerLink]="['/product-details',prod.id]" [p]="prod" (sd)="received($event)"></product-thumbnail>
     </div>
 </div>
