@@ -1,33 +1,15 @@
-<h3>Products List</h3>
-<!-- <div basic-highlight>Basic Highlight Directive</div>
-<div better-highlight [defaultColor]="'chartreuse'">Better Highlight Directive</div>
-<div [better-highlight]="'chartreuse'" [hc]="'maroon'">Better Highlight Directive</div>
-<div class="row">
-    <div class="col-md-1">
-        Filter: 
-    </div>
-    <div class="col-md-2">
-        <input type="text" class="form-control" [(ngModel)]="filterText" placeholder="Filter">
-    </div>
-    <div class="col-md-2" *ngIf="filterText.length>0 else noFilter">
-        <div class="alert alert-primary" role="alert">
-            <strong>{{filterText}}</strong>
-        </div>
-    </div>
-    <ng-template #noFilter>
-        <div class="col-md-2">
-            <div class="alert alert-warning" role="alert">
-                <strong>No Filter added</strong>
+<div class="panel">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">
+                <ul class="list-group">
+                    <li class="list-group-item"><a [routerLink]="['add']">Add Product</a></li>
+                    <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]">{{prod.title | uppercase}}</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <router-outlet></router-outlet>
             </div>
         </div>
-        
-    </ng-template>
-    <div class="col-md-2">
-        <button type="button" (click)="AddProd()" class="btn btn-primary">Add Product</button>
-    </div>
-</div> -->
-<div class="row">
-    <div style="margin-top: 5px;" *ngFor="let prod of productsList | filter : filterText : 'title': 'description'" class="col-md-3">
-        <product-thumbnail [routerLink]="['/product-details',prod.id]" [p]="prod" (sd)="received($event)"></product-thumbnail>
     </div>
 </div>

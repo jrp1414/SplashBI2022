@@ -22,10 +22,15 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { MenuComponent } from './menu/menu.component';
 import { ErrorComponent } from './error/error.component';
 import { ProductGuardService } from './shared/product-guard.service';
+import { AddProductComponent } from './products/add-product/add-product.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
 
 const routes:Routes = [
-  {path:'products',component: ProductListComponent },
-  {path:'product-details/:pid',component: ProductDetailsComponent, canActivate:[ProductGuardService] },
+  {path:'products',component: ProductListComponent, children:[
+    {path:'add',component: AddProductComponent }, 
+    {path:':pid/edit',component: EditProductComponent, canActivate:[ProductGuardService] },
+    {path:':pid',component: ProductDetailsComponent, canActivate:[ProductGuardService] }    
+  ] },
   {path:'string-interpolation', component: StringInterpolationComponent},
   {path:'property-binding', component: PropertyBindingComponent},
   {path:'event-binding', component:EventBindingComponent}, 
@@ -50,7 +55,9 @@ const routes:Routes = [
     UnlessDirective,
     ProductDetailsComponent,
     MenuComponent,
-    ErrorComponent
+    ErrorComponent,
+    AddProductComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,

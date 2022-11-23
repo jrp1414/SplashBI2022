@@ -13,7 +13,10 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private route:ActivatedRoute, private ps:ProductService) { }
 
   ngOnInit(): void {
-    this.product = this.ps.getProductDetails(this.route.snapshot.params["pid"]);    
+    // this.product = this.ps.getProductDetails(this.route.snapshot.params["pid"]);    
+    this.route.params.subscribe((p)=>{
+      this.product = this.ps.getProductDetails(p["pid"]);
+    });
   }
 
 }
