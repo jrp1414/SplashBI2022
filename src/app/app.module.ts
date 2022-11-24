@@ -24,6 +24,8 @@ import { ErrorComponent } from './error/error.component';
 import { ProductGuardService } from './shared/product-guard.service';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
+import { ObservablesComponent } from './observables/observables.component';
+import { MaterialModule } from './ui-libs/material.module';
 
 const routes:Routes = [
   {path:'products',component: ProductListComponent, children:[
@@ -35,7 +37,8 @@ const routes:Routes = [
   {path:'property-binding', component: PropertyBindingComponent},
   {path:'event-binding', component:EventBindingComponent}, 
   {path:'twoway-binding', component:TwowayBindingComponent},
-  {path:'error', component:ErrorComponent}
+  {path:'error', component:ErrorComponent},
+  {path:'obs', component:ObservablesComponent}
 ];
 
 
@@ -57,12 +60,14 @@ const routes:Routes = [
     MenuComponent,
     ErrorComponent,
     AddProductComponent,
-    EditProductComponent
+    EditProductComponent,
+    ObservablesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     PrimengModule,
+    MaterialModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
