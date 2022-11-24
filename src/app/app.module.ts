@@ -25,7 +25,20 @@ import { ProductGuardService } from './shared/product-guard.service';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ObservablesComponent } from './observables/observables.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './ui-libs/material.module';
+import { NavComponent } from './nav/nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
 
 const routes:Routes = [
   {path:'products',component: ProductListComponent, children:[
@@ -38,7 +51,10 @@ const routes:Routes = [
   {path:'event-binding', component:EventBindingComponent}, 
   {path:'twoway-binding', component:TwowayBindingComponent},
   {path:'error', component:ErrorComponent},
-  {path:'obs', component:ObservablesComponent}
+  {path:'obs', component:ObservablesComponent},
+  {path:'home', component:DashboardComponent},
+  {path:'', redirectTo:'home', pathMatch:'full'},
+  {path:'**', redirectTo:'home'}
 ];
 
 
@@ -61,14 +77,26 @@ const routes:Routes = [
     ErrorComponent,
     AddProductComponent,
     EditProductComponent,
-    ObservablesComponent
+    ObservablesComponent,
+    NavComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
     PrimengModule,
     MaterialModule,
-    RouterModule.forRoot(routes)
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [
     LoggerService
