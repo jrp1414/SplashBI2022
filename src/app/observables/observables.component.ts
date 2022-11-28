@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { Observable, Observer } from 'rxjs';
+import { Observable, Observer, Subscription } from 'rxjs';
 
 
 @Component({
@@ -9,44 +9,35 @@ import { Observable, Observer } from 'rxjs';
   styles: [
   ]
 })
-export class ObservablesComponent implements OnInit {
+export class ObservablesComponent implements OnInit, OnDestroy {
   message:string="";
   msgs:any[]=[];
+  obsSubscription:Subscription = new Subscription();
   constructor(private messageService: MessageService) { }
-
+  
   ngOnInit(): void {
 
-    let obs = new Observable((o:Observer<string>)=>{
-      setTimeout(() => {
-        o.next("First Data");
-      }, 1000);
-
-      setTimeout(() => {
-        o.next("Second Data");
-      }, 3000);
-
-      // setTimeout(() => {
-      //   o.error("Error Occurred in publisher");
-      // }, 4000);
-
-      setTimeout(() => {
-        o.complete();
-      }, 4000);
-
-      setTimeout(() => {
-        o.next("Third Data");
-      }, 5000);
+    let obs = new Observable((o:Observer<number>)=>{
+      let num = 1;
+      setInterval(()=>{
+        o.next(num);
+        num++;
+      },2000)
     });
 
-    obs.subscribe((data)=>{
+    this.obsSubscription = obs.subscribe((data)=>{
       //this.msgs.push({severity:'success', summary:'Data Received', detail:data});      
-      this.messageService.add({severity:'success', summary:'Data Received', detail:data});
+      this.messageService.add({severity:'success', summary:data.toString()});
     },(error)=>{
       this.messageService.add({severity:'error', summary:'Error Occurred', detail:error});
     },()=>{
       this.messageService.add({severity:'info', summary:'Completed', detail:"Observer Completed Publishing"});
     });
 
+  }
+
+  ngOnDestroy(): void {
+    this.obsSubscription.unsubscribe();
   }
 
 }
