@@ -39,6 +39,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MessageService } from 'primeng/api';
 
 const routes:Routes = [
   {path:'products',component: ProductListComponent, children:[
@@ -99,8 +100,9 @@ const routes:Routes = [
     MatMenuModule
   ],
   providers: [
-    LoggerService
+    LoggerService,
     // ProductService
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
