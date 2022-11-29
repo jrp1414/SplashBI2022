@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { products } from '../products';
 
 @Component({
   selector: 'app-add-product',
@@ -7,10 +8,17 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class AddProductComponent implements OnInit {
-
-  constructor() { }
+  types:string[]= [];
+  prodList:any[] = products;
+  constructor() {
+    this.types = [...new Set(this.prodList.map(m=>m.type))];    
+   }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(ap:any){
+    console.log(ap);
   }
 
 }
