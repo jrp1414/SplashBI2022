@@ -6,7 +6,7 @@ import { StringInterpolationComponent } from './string-interpolation/string-inte
 import { PropertyBindingComponent } from './property-binding/property-binding.component';
 import { EventBindingComponent } from './event-binding/event-binding.component';
 import { TwowayBindingComponent } from './twoway-binding/twoway-binding.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductThumbnailComponent } from './products/product-thumbnail/product-thumbnail.component';
 import { PrimengModule } from './ui-libs/primeng.module';
@@ -85,6 +85,7 @@ const routes:Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     PrimengModule,

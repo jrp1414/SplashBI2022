@@ -1,1 +1,23 @@
-<p>edit-product works!</p>
+<h3>Edit Product</h3>
+<form class="container" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-md-3">
+            <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" placeholder="Product Title" value="">
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
