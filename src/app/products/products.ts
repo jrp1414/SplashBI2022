@@ -1,3 +1,5 @@
+import { Tag } from "./edit-product/edit-product.component";
+
 export class Address {
   AddLine1: string | undefined;
   AddLine2: string | undefined;
@@ -13,7 +15,7 @@ export class Product {
   availibility: boolean | undefined;
   safeFor: number | undefined;
   qualityScore?: number;
-  tags: string[] | undefined;
+  tags?: string[];
   sellers?: Address[];
   price?: number;
   rating?: number;
@@ -29,7 +31,7 @@ export const products: Product[] = [
     "availibility": true,
     "safeFor": 1,
     "qualityScore": 1,
-    "tags": [],
+    "tags": ["test","tests1"],
     "sellers": [
       {
         "AddLine1": "",
