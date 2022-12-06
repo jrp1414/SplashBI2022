@@ -34,11 +34,18 @@ export const products: Product[] = [
     "tags": ["test","tests1"],
     "sellers": [
       {
-        "AddLine1": "",
-        "AddLine2": "",
-        "AddLine3": "",
-        "City": "",
-        "State": ""
+        "AddLine1": "Pune",
+        "AddLine2": "Pune",
+        "AddLine3": "Pune",
+        "City": "Pune",
+        "State": "Pune"
+      },
+      {
+        "AddLine1": "Hyderabad",
+        "AddLine2": "Hyderabad",
+        "AddLine3": "Hyderabad",
+        "City": "Hyderabad",
+        "State": "Telengana"
       }
     ],
     "price": 2.1,
