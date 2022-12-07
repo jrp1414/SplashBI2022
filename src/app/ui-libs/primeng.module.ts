@@ -5,6 +5,7 @@ import {RippleModule} from 'primeng/ripple';
 import {ChipsModule} from 'primeng/chips';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   exports:[
@@ -13,7 +14,8 @@ import {MessageModule} from 'primeng/message';
     RippleModule,
     ChipsModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimengModule { }

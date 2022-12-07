@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/shared/product.service';
 import { RangeValidator } from 'src/app/shared/range.validator';
 import { Product } from '../products';
