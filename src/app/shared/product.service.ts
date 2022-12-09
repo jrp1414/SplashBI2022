@@ -6,11 +6,12 @@ import { LoggerService } from './logger.service';
   providedIn:"root"
 })
 export class ProductService {
+  
   private products:Product[] = products;
   constructor(private logger:LoggerService) { }
 
   public getProducts():Product[]{
-    return this.products;
+    return this.products;  
   }
 
   public getProductDetails(pid:number):Product{

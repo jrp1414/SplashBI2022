@@ -26,6 +26,7 @@
     "primeng": "^15.0.0-rc.1",
     "rxjs": "~7.5.0",
     "rxjs-compat": "^6.6.7",
+    "splashbi-lib": "file:../splashbiLib/dist/splashbi-lib/splashbi-lib-0.0.1.tgz",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },

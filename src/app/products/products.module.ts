@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {ReactiveFormsModule,FormsModule} from "@angular/forms";
 import {RouterModule, Routes} from "@angular/router";
+import {SplashbiLibModule} from 'splashbi-lib';
 
 import {
   ProductListComponent,AddProductComponent,EditProductComponent, ProductGuardService,
@@ -34,6 +35,7 @@ const routes:Routes=[
     ReactiveFormsModule,
     PrimengModule,
     MaterialModule,
+    SplashbiLibModule,
     RouterModule.forChild(routes)
   ]
 })

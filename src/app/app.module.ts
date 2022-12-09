@@ -3,10 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {SplashbiLibModule} from 'splashbi-lib';
 import {
   Routes, AppComponent, StringInterpolationComponent, PropertyBindingComponent, EventBindingComponent,
-  TwowayBindingComponent, ShortenPipe, FilterPipe, BasicHighlightDirective, BetterHighlightDirective,
-  UnlessDirective, MenuComponent, ErrorComponent, ObservablesComponent, NavComponent, DashboardComponent,
+  TwowayBindingComponent, MenuComponent, ErrorComponent, ObservablesComponent, NavComponent, DashboardComponent,
   PrimengModule, MaterialModule, LoggerService,
   MessageService, ConfirmationService
 } from "./index";
@@ -32,12 +32,7 @@ const routes: Routes = [
     StringInterpolationComponent,
     PropertyBindingComponent,
     EventBindingComponent,
-    TwowayBindingComponent,
-    ShortenPipe,
-    FilterPipe,
-    BasicHighlightDirective,
-    BetterHighlightDirective,
-    UnlessDirective,
+    TwowayBindingComponent,    
     MenuComponent,
     ErrorComponent,
     ObservablesComponent,
@@ -50,7 +45,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     PrimengModule,
-    MaterialModule
+    MaterialModule,
+    SplashbiLibModule
   ],
   providers: [
     LoggerService,

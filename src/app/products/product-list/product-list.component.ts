@@ -13,22 +13,24 @@ import { products } from '../products';
   // ]
 })
 export class ProductListComponent implements OnInit {
-  productsList:any[]=[];
-  filterText:string="";
-  constructor(private ps:ProductService, private logger:LoggerService) { }
+  productsList: any[] = [];
+  filterText: string = "";
+  constructor(private ps: ProductService, private logger: LoggerService) { }
 
   ngOnInit(): void {
-    this.productsList = this.ps.getProducts();    
-    this.ps.sendData.subscribe((data:string)=>{
+    setTimeout(() => {
+      this.productsList = this.ps.getProducts();
+    }, 3000);
+    this.ps.sendData.subscribe((data: string) => {
       this.logger.log(`Recevied in Products List:  ${data}`);
     });
   }
 
-  received(data:any){
+  received(data: any) {
     console.log(data);
   }
 
-  AddProd(){
+  AddProd() {
     this.productsList.push({
       "id": 1,
       "title": "Brown eggs Test",
