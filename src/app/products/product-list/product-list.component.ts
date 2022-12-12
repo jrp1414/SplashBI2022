@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { LoggerService } from 'src/app/shared/logger.service';
 import { ProductService } from 'src/app/shared/product.service';
-import { products } from '../products';
+import { Product, products } from '../products';
 
 @Component({
   selector: 'app-product-list',
@@ -15,12 +16,17 @@ import { products } from '../products';
 export class ProductListComponent implements OnInit {
   productsList: any[] = [];
   filterText: string = "";
-  constructor(private ps: ProductService, private logger: LoggerService) { }
+  constructor(private ps: ProductService, private logger: LoggerService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.ps.getProducts().subscribe(data=>{
-      this.productsList = data;
+    // this.ps.getProducts().subscribe(data=>{
+    //   this.productsList = data; 
+    // });
+    this.route.data.subscribe(data=>{
+      // console.log(data["productsList"]);
+      this.productsList = data["productsList"] as any[];
     });
+
     this.ps.sendData.subscribe((data: string) => {
       this.logger.log(`Recevied in Products List:  ${data}`);
     });
