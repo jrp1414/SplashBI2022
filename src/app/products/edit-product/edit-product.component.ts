@@ -23,7 +23,7 @@ import { Product } from '../products';
   ]
 })
 export class EditProductComponent implements OnInit {
-  productList: Product[];
+  productList: Product[]=[];
   product?: Product;
   types: string[] = [];
   productForm!: FormGroup;
@@ -39,8 +39,8 @@ export class EditProductComponent implements OnInit {
   ]);;
   constructor(private ps: ProductService, private fb: FormBuilder, private route: ActivatedRoute,
     private toast: MessageService) {
-    this.productList = this.ps.getProducts();
-    this.types = [...new Set(this.productList.map(m => m.type))];
+    // this.productList = this.ps.getProducts();
+    // this.types = [...new Set(this.productList.map(m => m.type))];
   }
 
   ngOnInit(): void {

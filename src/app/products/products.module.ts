@@ -10,6 +10,7 @@ import {
 } from "./product.index";
 import { MaterialModule } from '../ui-libs/material.module';
 import { PrimengModule } from '../ui-libs/primeng.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 //products
@@ -36,7 +37,8 @@ const routes:Routes=[
     PrimengModule,
     MaterialModule,
     SplashbiLibModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    HttpClientModule
   ]
 })
 export class ProductsModule { }

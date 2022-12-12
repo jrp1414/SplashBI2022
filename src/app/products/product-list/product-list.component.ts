@@ -18,9 +18,9 @@ export class ProductListComponent implements OnInit {
   constructor(private ps: ProductService, private logger: LoggerService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.productsList = this.ps.getProducts();
-    }, 3000);
+    this.ps.getProducts().subscribe(data=>{
+      this.productsList = data;
+    });
     this.ps.sendData.subscribe((data: string) => {
       this.logger.log(`Recevied in Products List:  ${data}`);
     });

@@ -10,6 +10,7 @@ import {
   PrimengModule, MaterialModule, LoggerService,
   MessageService, ConfirmationService
 } from "./index";
+import { HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -46,7 +47,8 @@ const routes: Routes = [
     BrowserAnimationsModule,
     PrimengModule,
     MaterialModule,
-    SplashbiLibModule
+    SplashbiLibModule,
+    HttpClientModule
   ],
   providers: [
     LoggerService,
