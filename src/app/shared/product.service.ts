@@ -18,6 +18,11 @@ export class ProductService {
     return this.http.get(`${environment.baseUrl}/GetProducts`);
   }
 
+  public getProductTypes(): Observable<any> {
+    // return this.products;  
+    return this.http.get(`${environment.baseUrl}/GetTypes`);
+  }
+
   public getProductDetails(pid: number): Observable<any> {
     return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`);
   }

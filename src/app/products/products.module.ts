@@ -12,14 +12,14 @@ import { MaterialModule } from '../ui-libs/material.module';
 import { PrimengModule } from '../ui-libs/primeng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsResolver } from '../shared/products.resolver';
-import { ProductDetailsResolver } from '../shared/product-details.resolver';
+import { ProductDetailsResolver, ProductTypesResolver } from '../shared/product-details.resolver';
 
 
 //products
 const routes:Routes=[
   {path:'',component: ProductListComponent, resolve:{productsList:ProductsResolver}, children:[
     {path:'add',component: AddProductComponent }, 
-    {path:':pid/edit',component: EditProductComponent, canActivate:[ProductGuardService], canDeactivate:[ProductDeactiveGuard] },
+    {path:':pid/edit',component: EditProductComponent, resolve:{prod:ProductDetailsResolver, types:ProductTypesResolver}, canActivate:[ProductGuardService], canDeactivate:[ProductDeactiveGuard] },
     {path:':pid',component: ProductDetailsComponent, resolve:{prod:ProductDetailsResolver}, canActivate:[ProductGuardService] }    
   ] },
 ];

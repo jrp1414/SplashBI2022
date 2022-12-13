@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/shared/product.service';
 import { RangeValidator } from 'src/app/shared/range.validator';
 import { Product } from '../products';
@@ -25,7 +24,7 @@ import { Product } from '../products';
 export class EditProductComponent implements OnInit {
   productList: Product[] = [];
   product?: Product;
-  types: string[] = [];
+  types: any[] = [];
   productForm!: FormGroup;
   tags!: FormArray;
   sellersGroup: FormArray = this.fb.array([
@@ -44,37 +43,38 @@ export class EditProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((p) => {
-      this.ps.getProductDetails(p["pid"]).subscribe(data => {
-        this.product = data;
-        this.tags = this.fb.array(this.product?.tags!);
-        if (this.product?.sellers && this.product?.sellers?.length > 0) {
-          this.sellersGroup.removeAt(0);
-          for (const sel of this.product.sellers!) {
-            this.sellersGroup.push(this.fb.group({
-              AddLine1: sel.AddLine1,
-              AddLine2: sel.AddLine2,
-              AddLine3: sel.AddLine3, 
-              City: sel.City,
-              State: sel.State
-            }));
-          }
+    this.productForm = this.fb.group({
+      title: ["", [Validators.required, Validators.minLength(3)]],
+      typeid: ["", Validators.required],
+      description: ["", Validators.maxLength(100)],
+      availibility: false,
+      safeFor: 0,
+      qualityScore: 0,
+      price: [0, RangeValidator(1, 95)],
+      rating: 0,
+      imageUrl: "",
+      // tags: this.tags,
+      // sellers: this.sellersGroup
+    });
+    this.route.data.subscribe((data) => {
+      this.product = data["prod"];
+      this.types = data["types"];
+      console.log(this.product);
+      console.log(this.types);
+      this.productForm.patchValue(this.product!);
+      this.tags = this.fb.array(this.product?.tags!);
+      if (this.product?.sellers && this.product?.sellers?.length > 0) {
+        this.sellersGroup.removeAt(0);
+        for (const sel of this.product.sellers!) {
+          this.sellersGroup.push(this.fb.group({
+            AddLine1: sel.AddLine1,
+            AddLine2: sel.AddLine2,
+            AddLine3: sel.AddLine3,
+            City: sel.City,
+            State: sel.State
+          }));
         }
-      });
-
-      // this.productForm = this.fb.group({
-      //   title: [this.product.title,[Validators.required,Validators.minLength(3)]],
-      //   type: [this.product.type,Validators.required],
-      //   description: [this.product.description,Validators.maxLength(100)],
-      //   availibility: this.product.availibility,
-      //   safeFor: this.product.safeFor,
-      //   qualityScore: this.product.qualityScore,
-      //   price: [this.product.price,RangeValidator(1,95)],
-      //   rating: this.product.rating,
-      //   imageUrl: this.product.imageurl,
-      //   tags: this.tags,
-      //   sellers: this.sellersGroup
-      // });
+      }
     });
 
     this.productForm.get("availibility")?.valueChanges.subscribe((v: any) => {
@@ -86,6 +86,7 @@ export class EditProductComponent implements OnInit {
       }
       description.updateValueAndValidity();
     });
+
   }
 
   addTag() {

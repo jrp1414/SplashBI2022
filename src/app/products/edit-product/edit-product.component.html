@@ -12,12 +12,12 @@
         <div class="col-md-3">
             <mat-form-field appearance="fill">
                 <mat-label>Type</mat-label>
-                <mat-select formControlName="type">
-                    <mat-option *ngFor="let type of types" [value]="type">
-                        {{type}}
+                <mat-select formControlName="typeid">
+                    <mat-option *ngFor="let type of types" [value]="type.id">
+                        {{type.Type}}
                     </mat-option>
                 </mat-select>
-                <mat-error *ngIf="productForm.get('type')?.errors?.['required']">Type is Required</mat-error>
+                <mat-error *ngIf="productForm.get('typeid')?.errors?.['required']">Type is Required</mat-error>
             </mat-form-field>
         </div>
         <div class="col-md-6">
@@ -60,7 +60,7 @@
         </div>
     </div>
     <hr>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-1">
             Tags :
         </div>
@@ -81,7 +81,7 @@
                 aria-label="Example icon button with a home icon">
                 <mat-icon>delete</mat-icon>
             </button>
-            <!-- <p-chips formControlName="tags" separator="," placeholder="Hint: dairy, healthy"></p-chips> -->
+            <p-chips formControlName="tags" separator="," placeholder="Hint: dairy, healthy"></p-chips>
         </div>
 
     </div>
@@ -135,7 +135,7 @@
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
-    </div>
+    </div> -->
 
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>
