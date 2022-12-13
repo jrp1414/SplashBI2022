@@ -7,7 +7,8 @@
             <div class="col-md-2">
                 <ul class="list-group">
                     <li class="list-group-item"><a [routerLink]="['add']">Add Product</a></li>
-                    <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]">{{prod.title | uppercase}}</a></li>
+                    <!-- <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]" [queryParams]="{title:prod.title,rating:prod.rating}" >{{prod.title | uppercase}}</a></li> -->
+                    <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id,{title:prod.title,rating:prod.rating}]" [fragment]="prod.title" >{{prod.title | uppercase}}</a></li>
                 </ul>
             </div>
             <div class="col-md-10">
