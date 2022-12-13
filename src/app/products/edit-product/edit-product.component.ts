@@ -23,7 +23,7 @@ import { Product } from '../products';
   ]
 })
 export class EditProductComponent implements OnInit {
-  productList: Product[]=[];
+  productList: Product[] = [];
   product?: Product;
   types: string[] = [];
   productForm!: FormGroup;
@@ -45,40 +45,43 @@ export class EditProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
-      this.product = this.ps.getProductDetails(p["pid"]);
-      this.tags = this.fb.array(this.product.tags!);
-      if (this.product.sellers && this.product.sellers?.length > 0) {
-        this.sellersGroup.removeAt(0);
-        for (const sel of this.product.sellers!) {
-          this.sellersGroup.push(this.fb.group({
-            AddLine1: sel.AddLine1,
-            AddLine2: sel.AddLine2,
-            AddLine3: sel.AddLine3,
-            City: sel.City,
-            State: sel.State
-          }));
+      this.ps.getProductDetails(p["pid"]).subscribe(data => {
+        this.product = data;
+        this.tags = this.fb.array(this.product?.tags!);
+        if (this.product?.sellers && this.product?.sellers?.length > 0) {
+          this.sellersGroup.removeAt(0);
+          for (const sel of this.product.sellers!) {
+            this.sellersGroup.push(this.fb.group({
+              AddLine1: sel.AddLine1,
+              AddLine2: sel.AddLine2,
+              AddLine3: sel.AddLine3, 
+              City: sel.City,
+              State: sel.State
+            }));
+          }
         }
-      }
-      this.productForm = this.fb.group({
-        title: [this.product.title,[Validators.required,Validators.minLength(3)]],
-        type: [this.product.type,Validators.required],
-        description: [this.product.description,Validators.maxLength(100)],
-        availibility: this.product.availibility,
-        safeFor: this.product.safeFor,
-        qualityScore: this.product.qualityScore,
-        price: [this.product.price,RangeValidator(1,95)],
-        rating: this.product.rating,
-        imageUrl: this.product.imageurl,
-        tags: this.tags,
-        sellers: this.sellersGroup
       });
+
+      // this.productForm = this.fb.group({
+      //   title: [this.product.title,[Validators.required,Validators.minLength(3)]],
+      //   type: [this.product.type,Validators.required],
+      //   description: [this.product.description,Validators.maxLength(100)],
+      //   availibility: this.product.availibility,
+      //   safeFor: this.product.safeFor,
+      //   qualityScore: this.product.qualityScore,
+      //   price: [this.product.price,RangeValidator(1,95)],
+      //   rating: this.product.rating,
+      //   imageUrl: this.product.imageurl,
+      //   tags: this.tags,
+      //   sellers: this.sellersGroup
+      // });
     });
 
-    this.productForm.get("availibility")?.valueChanges.subscribe((v:any)=>{
+    this.productForm.get("availibility")?.valueChanges.subscribe((v: any) => {
       let description = this.productForm.get("description") as FormControl;
-      if(v){
+      if (v) {
         description.setValidators(Validators.required);
-      }else{
+      } else {
         description.clearValidators();
       }
       description.updateValueAndValidity();

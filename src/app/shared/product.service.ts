@@ -15,12 +15,11 @@ export class ProductService {
 
   public getProducts(): Observable<any> {
     // return this.products;  
-    return this.http.get(`${environment.baseUrl}GetProducts`);
+    return this.http.get(`${environment.baseUrl}/GetProducts`);
   }
 
-  public getProductDetails(pid: number): Product {
-    var product = this.products.find(m => m.id == pid);
-    return product ? product : new Product();
+  public getProductDetails(pid: number): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`);
   }
 
   public sendData: EventEmitter<string> = new EventEmitter();
