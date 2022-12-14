@@ -1,6 +1,11 @@
-import { Tag } from "./edit-product/edit-product.component";
+
+export class Tag{
+  id?:number;
+  tag1?:string;
+}
 
 export class Address {
+  id?:number;
   AddLine1: string | undefined;
   AddLine2: string | undefined;
   AddLine3: string | undefined;
@@ -15,14 +20,14 @@ export class Product {
   availibility: boolean | undefined;
   safeFor: number | undefined;
   qualityScore?: number;
-  tags?: string[];
-  sellers?: Address[];
+  Tags?: Tag[];
+  Addresses?: Address[];
   price?: number;
   rating?: number;
   imageurl?:string;  
 }
 
-export const products: Product[] = [
+export const products: any[] = [
   {
     "id": 1,
     "title": "Brown eggs",

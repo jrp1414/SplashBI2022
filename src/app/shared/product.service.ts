@@ -27,6 +27,10 @@ export class ProductService {
     return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`);
   }
 
+  public UpdateProductDetails(prod:Product): Observable<any> {
+    return this.http.put(`${environment.baseUrl}/UpdateProduct`,prod);
+  }
+
   public sendData: EventEmitter<string> = new EventEmitter();
 
 }

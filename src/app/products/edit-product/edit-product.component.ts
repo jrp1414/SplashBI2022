@@ -26,8 +26,13 @@ export class EditProductComponent implements OnInit {
   product?: Product;
   types: any[] = [];
   productForm!: FormGroup;
-  tags!: FormArray;
-  sellersGroup: FormArray = this.fb.array([
+  tags: FormArray = this.fb.array([
+    this.fb.group({
+      id: 0,
+      tag1: ""
+    })
+  ]);
+  Addresses: FormArray = this.fb.array([
     this.fb.group({
       AddLine1: "",
       AddLine2: "",
@@ -53,20 +58,28 @@ export class EditProductComponent implements OnInit {
       price: [0, RangeValidator(1, 95)],
       rating: 0,
       imageUrl: "",
-      // tags: this.tags,
-      // sellers: this.sellersGroup
+      tags: this.tags,
+      Addresses: this.Addresses
     });
     this.route.data.subscribe((data) => {
       this.product = data["prod"];
       this.types = data["types"];
+
       console.log(this.product);
-      console.log(this.types);
-      this.productForm.patchValue(this.product!);
-      this.tags = this.fb.array(this.product?.tags!);
-      if (this.product?.sellers && this.product?.sellers?.length > 0) {
-        this.sellersGroup.removeAt(0);
-        for (const sel of this.product.sellers!) {
-          this.sellersGroup.push(this.fb.group({
+      if (this.product?.Tags && this.product?.Tags?.length > 0) {
+        this.tags.removeAt(0);
+        for (const tag of this.product.Tags!) {
+          this.tags.push(this.fb.group({
+            id: tag?.id,
+            tag1: tag?.tag1
+          }));
+        }
+      }      
+      if (this.product?.Addresses && this.product?.Addresses?.length > 0) {
+        this.Addresses.removeAt(0);
+        for (const sel of this.product.Addresses!) {
+          this.Addresses.push(this.fb.group({
+            id:sel.id,
             AddLine1: sel.AddLine1,
             AddLine2: sel.AddLine2,
             AddLine3: sel.AddLine3,
@@ -75,6 +88,7 @@ export class EditProductComponent implements OnInit {
           }));
         }
       }
+      this.productForm.patchValue(this.product!);
     });
 
     this.productForm.get("availibility")?.valueChanges.subscribe((v: any) => {
@@ -92,7 +106,10 @@ export class EditProductComponent implements OnInit {
   addTag() {
     let tagControls = this.productForm.get("tags") as FormArray;
     if (tagControls.controls.length < 4) {
-      tagControls.push(this.fb.control(""));
+      tagControls.push(this.fb.group({
+        id: 0,
+        tag1: ""
+      }));
     } else {
       this.toast.add({
         severity: "warn",
@@ -108,10 +125,11 @@ export class EditProductComponent implements OnInit {
     tagControls.removeAt(index);
   }
 
-  addSeller() {
-    let sellerControls = this.productForm.get("sellers") as FormArray;
-    if (sellerControls.controls.length < 3) {
-      sellerControls.push(this.fb.group({
+  addAddress() {
+    let addressesControls = this.productForm.get("Addresses") as FormArray;
+    if (addressesControls.controls.length < 3) {
+      addressesControls.push(this.fb.group({
+        id:0,
         AddLine1: "",
         AddLine2: "",
         AddLine3: "",
@@ -128,13 +146,16 @@ export class EditProductComponent implements OnInit {
 
   }
 
-  RemoveSeller(index: number) {
-    let sellerControls = this.productForm.get("sellers") as FormArray;
-    sellerControls.removeAt(index);
+  RemoveAddress(index: number) {
+    let addressesControls = this.productForm.get("Addresses") as FormArray;
+    addressesControls.removeAt(index);
   }
 
   onSubmit() {
     console.log(this.productForm.value);
+    this.ps.UpdateProductDetails({...this.productForm.value,id:this.product?.id}).subscribe(data=>{
+      console.log(data);
+    });
   }
 
   formatLabel(value: number): string {
@@ -181,9 +202,4 @@ export class EditProductComponent implements OnInit {
   //   }
   // }
 
-}
-
-
-export class Tag {
-  name?: string;
 }

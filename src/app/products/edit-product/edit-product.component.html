@@ -1,5 +1,6 @@
 <h3>Edit Product</h3>
 <form class="container" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    
     <div class="row">
         <div class="col-md-3">
             <mat-form-field class="example-full-width">
@@ -60,46 +61,49 @@
         </div>
     </div>
     <hr>
-    <!-- <div class="row">
+     <div class="row">
         <div class="col-md-1">
             Tags :
         </div>
         <div class="col-md-1">
-            <button mat-icon-button color="primary" (click)="addTag()"
+            <!-- <button mat-icon-button color="primary" (click)="addTag()"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>add</mat-icon>
-            </button>
+            </button> -->
+            <button type="button" class="btn btn-primary" (click)="addTag()">Add Tag</button>
         </div>
     </div>
     <div class="row">
 
         <div class="col-md-3" formArrayName="tags" *ngFor="let control of tags.controls;let i=index">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Ex. Dairy" [formControlName]="i">
+            <mat-form-field class="example-full-width" [formGroupName]="i">
+                <input type="hidden" formControlName="id">
+                <input matInput placeholder="Ex. Dairy" formControlName="tag1">
             </mat-form-field>
             <button mat-icon-button (click)="RemoveTag(i)" color="warn"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>delete</mat-icon>
-            </button>
-            <p-chips formControlName="tags" separator="," placeholder="Hint: dairy, healthy"></p-chips>
+            </button>            
         </div>
 
     </div>
     <hr>
+    
     <div class="row">
         <div class="col-md-1">
             Sellers :
         </div>
         <div class="col-md-1">
-            <button mat-icon-button color="primary" (click)="addSeller()"
+            <!-- <button mat-icon-button color="primary" (click)="addAddress()"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>add</mat-icon>
-            </button>
+            </button> -->
+            <button type="button" class="btn btn-primary" (click)="addAddress()">Add Seller</button>
         </div>
     </div>
-    <div class="card-body" formArrayName="sellers" *ngFor="let control of sellersGroup.controls;let i=index">
+    <div class="card-body" formArrayName="Addresses" *ngFor="let control of Addresses.controls;let i=index">
         <div class="row" [formGroupName]="i">
-
+            <input type="hidden" name="id">
             <div class="col-md-2" style="margin-right: 5px;" >
                 <mat-form-field class="example-full-width">
                     <mat-label>Address Line 1</mat-label>
@@ -130,12 +134,12 @@
                     <input matInput formControlName="State" placeholder="State" >
                 </mat-form-field>               
             </div>
-            <button mat-icon-button (click)="RemoveSeller(i)" color="warn"
+            <button mat-icon-button (click)="RemoveAddress(i)" color="warn"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>delete</mat-icon>
             </button>
         </div>
-    </div> -->
+    </div>
 
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>
