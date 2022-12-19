@@ -27,10 +27,19 @@ export class ProductService {
     return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`);
   }
 
+  public AddProduct(prod:Product): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/AddProduct`,prod);
+  }
+
   public UpdateProductDetails(prod:Product): Observable<any> {
     return this.http.put(`${environment.baseUrl}/UpdateProduct`,prod);
   }
 
+  public DeleteProduct(id:number): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}/DeleteProduct?productId=${id}`);
+  }
+
   public sendData: EventEmitter<string> = new EventEmitter();
+  public refreshData: EventEmitter<boolean> = new EventEmitter();
 
 }

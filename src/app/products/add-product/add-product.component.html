@@ -1,57 +1,146 @@
-<form class="container" #addProduct="ngForm" (ngSubmit)="onSubmit(addProduct)">
-    <h4>Add Product</h4>
+<h3>Add Product</h3>
+<form class="container" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    
     <div class="row">
         <div class="col-md-3">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" name="Title" required ngModel #Title="ngModel" id="title"
-                    aria-describedby="helpId" placeholder="Product Title">
-                <div *ngIf="Title.invalid && Title.dirty" class="alert alert-danger" role="alert">
-                    <strong>Title is required</strong>
-                </div>
-                <!-- <ul class="list-group">                
-                <li class="list-group-item">Dirty : {{Title.dirty}}</li>
-                <li class="list-group-item">Pristine : {{Title.pristine}}</li>
-                <li class="list-group-item">Valid : {{Title.valid}}</li>
-                <li class="list-group-item">Invalid : {{Title.invalid}}</li>
-                <li class="list-group-item">Touched : {{Title.touched}}</li>
-                <li class="list-group-item">Untouched : {{Title.untouched}}</li>
-              </ul> -->
-            </div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput formControlName="title" placeholder="Product Title" value="">
+                <mat-error *ngIf="productForm.get('title')?.errors?.['required']">Title is Required</mat-error>
+                <mat-error *ngIf="productForm.controls['title'].errors?.['minlength']">Minimum length is 3</mat-error>
+            </mat-form-field>
         </div>
         <div class="col-md-3">
-            <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea class="form-control" name="Description" ngModel #Description="ngModel" required
-                    id="Description" rows="3"></textarea>
-                <div *ngIf="Description.invalid && Description.dirty" class="alert alert-danger" role="alert">
-                    <strong>Description is required</strong>
-                </div>
-            </div>
+            <mat-form-field appearance="fill">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="typeid">
+                    <mat-option *ngFor="let type of types" [value]="type.id">
+                        {{type.Type}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="productForm.get('typeid')?.errors?.['required']">Type is Required</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" placeholder="Write the product description"></textarea>
+                <mat-error *ngIf="productForm.get('description')?.errors?.['maxlength']">Max Length 100</mat-error>
+                <mat-error *ngIf="productForm.get('description')?.errors?.['required']">Description is Required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3">
+            <mat-slide-toggle formControlName="availibility">Available</mat-slide-toggle>
         </div>
         <div class="col-md-3">
-            <div class="form-group">
-                <label for="Type">Type</label>
-                <select class="form-control" name="Type" ngModel id="Type">
-                    <option *ngFor="let type of types">{{type}}</option>
-                </select>
-            </div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Safe for</mat-label>
+                <input matInput type="number" formControlName="safeFor" placeholder="Product Title" value="">
+            </mat-form-field>
         </div>
         <div class="col-md-3">
-            <div class="form-group">
-                <label for="Price">Price</label>
-                <input type="number" class="form-control" name="Price" id="Price" max="100" min="1" ngModel
-                    #Price="ngModel" aria-describedby="helpId" placeholder="Price">
-                <div *ngIf="Price.errors?.['max']" class="alert alert-danger" role="alert">
-                    <strong>Price should be max 100</strong>
-                </div>
-                <div *ngIf="Price.errors?.['min'] && Price.invalid" class="alert alert-danger" role="alert">
-                    <strong>Price should be min 1</strong>
-                </div>
+            <mat-label>Quality Score</mat-label>
+            <mat-slider min="0" max="100" showTickMarks ngDefaultControl formControlName="qualityScore" discrete
+                [displayWith]="formatLabel">
+                <input matSliderThumb>
+            </mat-slider>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field appearance="fill" floatLabel="always">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" formControlName="price" class="example-right-align" placeholder="0">
+                <span matTextPrefix>$&nbsp;</span>
+                <span matTextSuffix>.00</span>
+                <mat-error *ngIf="productForm.get('price')?.errors?.['range']">Outside Price Range</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-label>Rating</mat-label>
+            <p-rating formControlName="rating" [cancel]="false"></p-rating>
+        </div>
+    </div>
+    <hr>
+     <div class="row">
+        <div class="col-md-1">
+            Tags :
+        </div>
+        <div class="col-md-1">
+            <button mat-icon-button color="primary" (click)="addTag()" type="button"
+                aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+            </button>
+            <!-- <button type="button" class="btn btn-primary" (click)="addTag()">Add Tag</button> -->
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-3" formArrayName="tags" *ngFor="let control of tags.controls;let i=index">
+            <mat-form-field class="example-full-width" [formGroupName]="i">
+                <input type="hidden" formControlName="id">
+                <input matInput placeholder="Ex. Dairy" formControlName="tag1">
+            </mat-form-field>
+            <button mat-icon-button (click)="RemoveTag(i)" type="button" color="warn"
+                aria-label="Example icon button with a home icon">
+                <mat-icon>delete</mat-icon>
+            </button>            
+        </div>
+
+    </div>
+    <hr>
+    
+    <div class="row">
+        <div class="col-md-1">
+            Sellers :
+        </div>
+        <div class="col-md-1">
+            <button mat-icon-button color="primary" type="button" (click)="addAddress()"
+                aria-label="Example icon button with a home icon">
+                <mat-icon>add</mat-icon>
+            </button>
+            <!-- <button type="button" class="btn btn-primary" (click)="addAddress()">Add Seller</button> -->
+        </div>
+    </div>
+    <div class="card-body" formArrayName="Addresses" *ngFor="let control of Addresses.controls;let i=index">
+        <div class="row" [formGroupName]="i">
+            <input type="hidden" name="id">
+            <div class="col-md-2" style="margin-right: 5px;" >
+                <mat-form-field class="example-full-width">
+                    <mat-label>Address Line 1</mat-label>
+                    <input matInput formControlName="AddLine1" placeholder="Address Line 1" >
+                </mat-form-field>               
             </div>
+            <div class="col-md-2" style="margin-right: 5px;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Address Line 2</mat-label>
+                    <input matInput formControlName="AddLine2" placeholder="Address Line 2" >
+                </mat-form-field>               
+            </div>
+            <div class="col-md-2" style="margin-right: 5px;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Address Line 3</mat-label>
+                    <input matInput formControlName="AddLine3" placeholder="Address Line 3" >
+                </mat-form-field>               
+            </div>
+            <div class="col-md-2" style="margin-right: 5px;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="City" placeholder="City" >
+                </mat-form-field>               
+            </div>
+            <div class="col-md-2" style="margin-right: 5px;">
+                <mat-form-field class="example-full-width">
+                    <mat-label>State</mat-label>
+                    <input matInput formControlName="State" placeholder="State" >
+                </mat-form-field>               
+            </div>
+            <button mat-icon-button (click)="RemoveAddress(i)" type="button" color="warn"
+                aria-label="Example icon button with a home icon">
+                <mat-icon>delete</mat-icon>
+            </button>
         </div>
     </div>
 
-    <!-- <button type="submit" [disabled]="addProduct.invalid" class="btn btn-primary">Submit</button> -->
+    <br>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

@@ -1,7 +1,7 @@
 <div class="panel">
     <div class="panel-header">
         <h3>Products</h3>
-    </div>   
+    </div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-2">
@@ -9,7 +9,13 @@
                     <li class="list-group-item"><a [routerLink]="['add']">Add Product</a></li>
                     <!-- <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]" [queryParams]="{title:prod.title,rating:prod.rating}" >{{prod.title | uppercase}}</a></li> -->
                     <!-- <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id,{title:prod.title,rating:prod.rating}]" [fragment]="prod.title" >{{prod.title | uppercase}}</a></li> -->
-                    <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]" >{{prod.title | uppercase}}</a></li>
+                    <li class="list-group-item" *ngFor="let prod of productsList"><a
+                            [routerLink]="[prod.id]">{{prod.title | uppercase}} </a>
+                        <button mat-icon-button (click)="RemoveProduct(prod)" type="button" color="warn"
+                            aria-label="Example icon button with a home icon">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-10">
@@ -18,4 +24,3 @@
         </div>
     </div>
 </div>
-

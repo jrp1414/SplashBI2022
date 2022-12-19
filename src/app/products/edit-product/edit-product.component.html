@@ -66,11 +66,11 @@
             Tags :
         </div>
         <div class="col-md-1">
-            <!-- <button mat-icon-button color="primary" (click)="addTag()"
+            <button type="button" mat-icon-button color="primary" (click)="addTag()"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>add</mat-icon>
-            </button> -->
-            <button type="button" class="btn btn-primary" (click)="addTag()">Add Tag</button>
+            </button>
+            <!-- <button type="button" class="btn btn-primary" (click)="addTag()">Add Tag</button> -->
         </div>
     </div>
     <div class="row">
@@ -94,11 +94,11 @@
             Sellers :
         </div>
         <div class="col-md-1">
-            <!-- <button mat-icon-button color="primary" (click)="addAddress()"
+            <button mat-icon-button color="primary" type="button" (click)="addAddress()"
                 aria-label="Example icon button with a home icon">
                 <mat-icon>add</mat-icon>
-            </button> -->
-            <button type="button" class="btn btn-primary" (click)="addAddress()">Add Seller</button>
+            </button>
+            <!-- <button type="button" class="btn btn-primary" (click)="addAddress()">Add Seller</button> -->
         </div>
     </div>
     <div class="card-body" formArrayName="Addresses" *ngFor="let control of Addresses.controls;let i=index">

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ReactiveFormsModule,FormsModule} from "@angular/forms";
-import {RouterModule, Routes} from "@angular/router";
-import {SplashbiLibModule} from 'splashbi-lib';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { RouterModule, Routes } from "@angular/router";
+import { SplashbiLibModule } from 'splashbi-lib';
 
 import {
-  ProductListComponent,AddProductComponent,EditProductComponent, ProductGuardService,
-  ProductDetailsComponent,ProductThumbnailComponent, ProductDeactiveGuard
+  ProductListComponent, AddProductComponent, EditProductComponent, ProductGuardService,
+  ProductDetailsComponent, ProductThumbnailComponent, ProductDeactiveGuard
 } from "./product.index";
 import { MaterialModule } from '../ui-libs/material.module';
 import { PrimengModule } from '../ui-libs/primeng.module';
@@ -16,12 +16,14 @@ import { ProductDetailsResolver, ProductTypesResolver } from '../shared/product-
 
 
 //products
-const routes:Routes=[
-  {path:'',component: ProductListComponent, resolve:{productsList:ProductsResolver}, children:[
-    {path:'add',component: AddProductComponent }, 
-    {path:':pid/edit',component: EditProductComponent, resolve:{prod:ProductDetailsResolver, types:ProductTypesResolver}, canActivate:[ProductGuardService], canDeactivate:[ProductDeactiveGuard] },
-    {path:':pid',component: ProductDetailsComponent, resolve:{prod:ProductDetailsResolver}, canActivate:[ProductGuardService] }    
-  ] },
+const routes: Routes = [
+  {
+    path: '', component: ProductListComponent, resolve: { productsList: ProductsResolver }, children: [
+      { path: 'add', component: AddProductComponent, resolve: { types: ProductTypesResolver } },
+      { path: ':pid/edit', component: EditProductComponent, resolve: { prod: ProductDetailsResolver, types: ProductTypesResolver }, canActivate: [ProductGuardService] }, //canDeactivate: [ProductDeactiveGuard]
+      { path: ':pid', component: ProductDetailsComponent, resolve: { prod: ProductDetailsResolver }, canActivate: [ProductGuardService] }
+    ]
+  },
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { LoggerService } from 'src/app/shared/logger.service';
 import { ProductService } from 'src/app/shared/product.service';
 import { Product, products } from '../products';
@@ -16,19 +17,24 @@ import { Product, products } from '../products';
 export class ProductListComponent implements OnInit {
   productsList: any[] = [];
   filterText: string = "";
-  constructor(private ps: ProductService, private logger: LoggerService, private route:ActivatedRoute) { }
+  constructor(private ps: ProductService, private logger: LoggerService, private route: ActivatedRoute, private confirm: ConfirmationService) { }
 
   ngOnInit(): void {
     // this.ps.getProducts().subscribe(data=>{
     //   this.productsList = data; 
     // });
-    this.route.data.subscribe(data=>{
+    this.route.data.subscribe(data => {
       // console.log(data["productsList"]);
       this.productsList = data["productsList"] as any[];
     });
 
     this.ps.sendData.subscribe((data: string) => {
       this.logger.log(`Recevied in Products List:  ${data}`);
+    });
+    this.ps.refreshData.subscribe(data => {
+      if (data) {
+        this.RefreshProducts();
+      }
     });
   }
 
@@ -58,6 +64,27 @@ export class ProductListComponent implements OnInit {
       "price": 2.1,
       "rating": 4,
       "imageurl": "https://previews.123rf.com/images/bhofack2/bhofack21502/bhofack2150200615/37073865-raw-organic-brown-eggs-in-a-basket.jpg"
+    });
+  }
+
+  RemoveProduct(product:Product) {
+    this.confirm.confirm({
+      message: `Are you sure to delete ${product.title}?`,
+      accept: () => {
+        this.ps.DeleteProduct(product.id).subscribe(data => {
+          this.RefreshProducts();
+        });
+      },
+      reject: () => {
+        return false;
+      }
+    });
+
+  }
+
+  RefreshProducts() {
+    this.ps.getProducts().subscribe(products => {
+      this.productsList = products;
     });
   }
 

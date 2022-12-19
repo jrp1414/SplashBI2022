@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/shared/product.service';
 import { RangeValidator } from 'src/app/shared/range.validator';
@@ -42,12 +42,14 @@ export class EditProductComponent implements OnInit {
     })
   ]);;
   constructor(private ps: ProductService, private fb: FormBuilder, private route: ActivatedRoute,
-    private toast: MessageService) {
+    private toast: MessageService, private router: Router) {
     // this.productList = this.ps.getProducts();
     // this.types = [...new Set(this.productList.map(m => m.type))];
   }
 
   ngOnInit(): void {
+
+    // this.router.getCurrentNavigation()?.extras?.replace = null;
     this.productForm = this.fb.group({
       title: ["", [Validators.required, Validators.minLength(3)]],
       typeid: ["", Validators.required],
@@ -74,12 +76,12 @@ export class EditProductComponent implements OnInit {
             tag1: tag?.tag1
           }));
         }
-      }      
+      }
       if (this.product?.Addresses && this.product?.Addresses?.length > 0) {
         this.Addresses.removeAt(0);
         for (const sel of this.product.Addresses!) {
           this.Addresses.push(this.fb.group({
-            id:sel.id,
+            id: sel.id,
             AddLine1: sel.AddLine1,
             AddLine2: sel.AddLine2,
             AddLine3: sel.AddLine3,
@@ -129,7 +131,7 @@ export class EditProductComponent implements OnInit {
     let addressesControls = this.productForm.get("Addresses") as FormArray;
     if (addressesControls.controls.length < 3) {
       addressesControls.push(this.fb.group({
-        id:0,
+        id: 0,
         AddLine1: "",
         AddLine2: "",
         AddLine3: "",
@@ -153,8 +155,9 @@ export class EditProductComponent implements OnInit {
 
   onSubmit() {
     console.log(this.productForm.value);
-    this.ps.UpdateProductDetails({...this.productForm.value,id:this.product?.id}).subscribe(data=>{
-      console.log(data);
+    this.ps.UpdateProductDetails({ ...this.productForm.value, id: this.product?.id }).subscribe(data => {
+      this.ps.refreshData.emit(true);
+      this.router.navigateByUrl(`/products/${this.product?.id}`, { state: { bypassFormGuard: true } });
     });
   }
 
