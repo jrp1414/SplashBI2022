@@ -9,6 +9,7 @@ import { PropertyBindingComponent } from './property-binding/property-binding.co
 import { StringInterpolationComponent } from './string-interpolation/string-interpolation.component';
 import { TwowayBindingComponent } from './twoway-binding/twoway-binding.component';
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
+import { DynamicComponent } from './dynamic/dynamic.component';
 
 const routes: Routes = [
   { path: 'products', loadChildren: () => import("./products/products.module").then(m => m.ProductsModule) },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'obs', component: ObservablesComponent },
   { path: 'home', component: DashboardComponent },
   { path: 'cont-proj', component: ContentProjectionComponent },
+  { path: 'dynamic', component: DynamicComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];

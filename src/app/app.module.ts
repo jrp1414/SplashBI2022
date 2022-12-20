@@ -12,6 +12,10 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { ChildComponent, ContentProjectionComponent } from './content-projection/content-projection.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DynamicComponent } from './dynamic/dynamic.component';
+import { CarComponent, BikeComponent, EVComponent } from './dynamic/ads.component';
+import { AdBannerComponent } from './dynamic/ad-banner.component';
+import { AdDirective } from './dynamic/ad.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,13 @@ import { AppRoutingModule } from './app-routing.module';
     NavComponent,
     DashboardComponent,
     ContentProjectionComponent,
-    ChildComponent
+    ChildComponent,
+    DynamicComponent,
+    CarComponent,
+    BikeComponent,
+    EVComponent,
+    AdBannerComponent,
+    AdDirective
   ],
   imports: [
     BrowserModule,
