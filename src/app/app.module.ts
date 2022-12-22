@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule} from "@angular/forms";
@@ -16,6 +16,7 @@ import { DynamicComponent } from './dynamic/dynamic.component';
 import { CarComponent, BikeComponent, EVComponent } from './dynamic/ads.component';
 import { AdBannerComponent } from './dynamic/ad-banner.component';
 import { AdDirective } from './dynamic/ad.directive';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import { AdDirective } from './dynamic/ad.directive';
     MaterialModule,
     SplashbiLibModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     LoggerService,
