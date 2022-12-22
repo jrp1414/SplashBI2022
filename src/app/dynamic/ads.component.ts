@@ -36,6 +36,7 @@ export class BikeComponent implements OnInit {
     selector: 'ad-EV',
     template: `
     <h1>Electric Vehicle Advertisement</h1>
+    <h2>{{data.name}} {{data.model}}</h2>
     `
 })
 

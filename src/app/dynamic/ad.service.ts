@@ -8,8 +8,8 @@ export class AdService {
     getAds() {
         return [
             new AdItem(CarComponent, {name:"Tata Nexon", model:"test-001"}),
-            new AdItem(BikeComponent, {name:"Tata Nexon", model:"test-001"}),
-            new AdItem(EVComponent, {name:"Tata Nexon", model:"test-001"})
+            new AdItem(BikeComponent, {name:"Honda Shine", model:"hnd-001"}),
+            new AdItem(EVComponent, {name:"OLA E1", model:"ola-001"})
         ];
     }
 }

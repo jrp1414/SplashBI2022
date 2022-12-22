@@ -15,7 +15,7 @@ export class AdBannerComponent implements AfterContentInit {
     currentAdIndex = -1;
     interval: any;
 
-    @ViewChild(AdDirective, { read: true, static: false }) adHost!: AdDirective;
+    @ViewChild(AdDirective, { static: true }) adHost!: AdDirective;
 
     constructor(private adService: AdService) {
         this.ads = this.adService.getAds();
