@@ -43,6 +43,6 @@ const routes: Routes = [
     SplashbiLibModule,
     RouterModule.forChild(routes),
     HttpClientModule
-  ]
+  ],
 })
 export class ProductsModule { }

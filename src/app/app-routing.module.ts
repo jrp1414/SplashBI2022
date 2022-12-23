@@ -14,14 +14,14 @@ import { DynamicComponent } from './dynamic/dynamic.component';
 const routes: Routes = [
   { path: 'products', loadChildren: () => import("./products/products.module").then(m => m.ProductsModule) },
   { path: 'string-interpolation', component: StringInterpolationComponent },
-  { path: 'property-binding', component: PropertyBindingComponent, outlet:'aux1' },
-  { path: 'event-binding', component: EventBindingComponent, outlet:'aux2' },
+  { path: 'property-binding', component: PropertyBindingComponent },
+  { path: 'event-binding', component: EventBindingComponent },
   { path: 'twoway-binding', component: TwowayBindingComponent },
   { path: 'error', component: ErrorComponent },
   { path: 'obs', component: ObservablesComponent },
   { path: 'home', component: DashboardComponent },
-  { path: 'cont-proj', component: ContentProjectionComponent, outlet:'aux1' },
-  { path: 'dynamic', component: DynamicComponent, outlet:'aux2' },
+  { path: 'cont-proj', component: ContentProjectionComponent }, 
+  { path: 'dynamic', component: DynamicComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];

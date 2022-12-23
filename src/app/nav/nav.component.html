@@ -3,12 +3,16 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/', {outlets:{primary:'home', 'aux1':['cont-proj'], 'aux2':['dynamic']}}]">Home</a>
+      <a mat-list-item routerLink="home">Home</a>
       <a mat-list-item routerLink="products">Products</a>
-      <a mat-list-item [routerLink]="['/',{outlets:{primary:'string-interpolation', 'aux1':['property-binding'], 'aux2':['event-binding']}}]">String Interpolation</a>      
+      <a mat-list-item routerLink="string-interpolation">String Interpolation</a>
+      <a mat-list-item routerLink="property-binding">Property Binding</a>
+      <a mat-list-item routerLink="event-binding">Event Binding</a>
       <a mat-list-item routerLink="twoway-binding">Two Way Binding</a>
-      <a mat-list-item routerLink="obs">Observables</a>      
-
+      <a mat-list-item routerLink="obs">Observables</a>
+      <a mat-list-item routerLink="cont-proj">Conent Projection</a>
+      <a mat-list-item routerLink="dynamic">Dynamic Components</a>
+      
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -19,16 +23,6 @@
       <span>SplashBI2022</span>
     </mat-toolbar>
     <mat-progress-bar mode="indeterminate" color="accent" *ngIf="isLoading"></mat-progress-bar>
-    <div class="row">
-      <div class="col-md-6">
-        <router-outlet></router-outlet>
-      </div>
-      <div class="col-md-2">
-        <router-outlet name="aux1"></router-outlet>
-      </div>
-      <div class="col-md-2">
-        <router-outlet name="aux2"></router-outlet>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
