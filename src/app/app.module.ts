@@ -18,6 +18,7 @@ import { AdBannerComponent } from './dynamic/ad-banner.component';
 import { AdDirective } from './dynamic/ad.directive';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ErrorInterceptor } from './shared/error.interceptor';
+import { WebWorkerComponent } from './web-worker/web-worker.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ErrorInterceptor } from './shared/error.interceptor';
     BikeComponent,
     EVComponent,
     AdBannerComponent,
-    AdDirective
+    AdDirective,
+    WebWorkerComponent
   ],
   imports: [
     BrowserModule,
