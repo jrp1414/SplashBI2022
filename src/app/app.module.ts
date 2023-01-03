@@ -1,4 +1,4 @@
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
@@ -68,6 +68,10 @@ import { WebWorkerComponent } from './web-worker/web-worker.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
+  static injector:Injector;
+  
+  constructor(private injector: Injector) {
+    AppModule.injector = injector;    
+  }
 }
 

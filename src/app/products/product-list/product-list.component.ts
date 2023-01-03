@@ -4,7 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import { LoggerService } from 'src/app/shared/logger.service';
 import { ProductService } from 'src/app/shared/product.service';
 import { Product, products } from '../products';
-
+import { Confirmable } from 'src/app/shared/confirm.decorator';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -17,7 +17,7 @@ import { Product, products } from '../products';
 export class ProductListComponent implements OnInit {
   productsList: any[] = [];
   filterText: string = "";
-  constructor(private ps: ProductService, private logger: LoggerService, private route: ActivatedRoute, private confirm: ConfirmationService) { }
+  constructor(private ps: ProductService, private logger: LoggerService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     // this.ps.getProducts().subscribe(data=>{
@@ -67,19 +67,11 @@ export class ProductListComponent implements OnInit {
     });
   }
 
+  @Confirmable('title') 
   RemoveProduct(product:Product) {
-    this.confirm.confirm({
-      message: `Are you sure to delete ${product.title}?`,
-      accept: () => {
-        this.ps.DeleteProduct(product.id).subscribe(data => {
-          this.RefreshProducts();
-        });
-      },
-      reject: () => {
-        return false;
-      }
-    });
-
+    this.ps.DeleteProduct(product.id).subscribe(data => {
+      this.RefreshProducts();
+    }); 
   }
 
   RefreshProducts() {
