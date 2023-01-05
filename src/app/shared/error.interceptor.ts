@@ -23,6 +23,14 @@ export class ErrorInterceptor implements HttpInterceptor {
                         });
                         this.router.navigate(['/error']);
                     }
+
+                    if (error.status == 401) {
+                        this.toast.add({
+                            severity: 'error',
+                            summary: 'Error',
+                            detail: 'Unauthorized User request'
+                        });                        
+                    }
                 }
             })
         )

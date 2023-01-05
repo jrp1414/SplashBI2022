@@ -11,6 +11,7 @@ import { TwowayBindingComponent } from './twoway-binding/twoway-binding.componen
 import { ContentProjectionComponent } from './content-projection/content-projection.component';
 import { DynamicComponent } from './dynamic/dynamic.component';
 import { WebWorkerComponent } from './web-worker/web-worker.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'products', loadChildren: () => import("./products/products.module").then(m => m.ProductsModule) },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'cont-proj', component: ContentProjectionComponent }, 
   { path: 'dynamic', component: DynamicComponent },
   { path: 'webworker', component: WebWorkerComponent },
+  { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];
