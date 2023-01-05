@@ -20,6 +20,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ErrorInterceptor } from './shared/error.interceptor';
 import { WebWorkerComponent } from './web-worker/web-worker.component';
 import { LoginComponent } from './login/login.component';
+import { TokenInterceptor } from './shared/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { LoginComponent } from './login/login.component';
     // ProductService
     MessageService,
     ConfirmationService,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, 
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

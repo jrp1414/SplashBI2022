@@ -15,51 +15,31 @@ export class ProductService {
   constructor(private logger: LoggerService, private http: HttpClient, private local: LocalStorageService) { }
 
   public getProducts(): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.get(`${environment.baseUrl}/GetProducts`, options);
+    // var token = this.local.Get();
+    // let options = {
+    //   headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
+    // };
+    return this.http.get(`${environment.baseUrl}/GetProducts`);
   }
 
   public getProductTypes(): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.get(`${environment.baseUrl}/GetTypes`, options);
+    return this.http.get(`${environment.baseUrl}/GetTypes`);
   }
 
   public getProductDetails(pid: number): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`, options);
+    return this.http.get(`${environment.baseUrl}/GetProduct?productId=${pid}`);
   }
 
   public AddProduct(prod: Product): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.post(`${environment.baseUrl}/AddProduct`, prod, options);
+    return this.http.post(`${environment.baseUrl}/AddProduct`, prod);
   }
 
   public UpdateProductDetails(prod: Product): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.put(`${environment.baseUrl}/UpdateProduct`, prod, options);
+    return this.http.put(`${environment.baseUrl}/UpdateProduct`, prod);
   }
 
   public DeleteProduct(id: number): Observable<any> {
-    var token = this.local.Get();
-    let options = {
-      headers: new HttpHeaders().set('Authorization', `${token.token_type} ${token.token}`)
-    };
-    return this.http.delete(`${environment.baseUrl}/DeleteProduct?productId=${id}`, options);
+    return this.http.delete(`${environment.baseUrl}/DeleteProduct?productId=${id}`);
   }
 
   public sendData: EventEmitter<string> = new EventEmitter();
