@@ -5,6 +5,8 @@ import { LoggerService } from 'src/app/shared/logger.service';
 import { ProductService } from 'src/app/shared/product.service';
 import { Product, products } from '../products';
 import { Confirmable } from 'src/app/shared/confirm.decorator';
+import { Store } from '@ngrx/store';
+import { cartAction, CartInfo } from 'src/app/ngrxstore/cart.action';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -17,7 +19,7 @@ import { Confirmable } from 'src/app/shared/confirm.decorator';
 export class ProductListComponent implements OnInit {
   productsList: any[] = [];
   filterText: string = "";
-  constructor(private ps: ProductService, private logger: LoggerService, private route: ActivatedRoute) { }
+  constructor(private ps: ProductService, private logger: LoggerService, private route: ActivatedRoute, private store: Store) { }
 
   ngOnInit(): void {
     // this.ps.getProducts().subscribe(data=>{
@@ -35,6 +37,11 @@ export class ProductListComponent implements OnInit {
       if (data) {
         this.RefreshProducts();
       }
+    });
+
+    this.store.subscribe((s: any) => {
+      let titles = (<CartInfo>s.cartR).titles;
+      this.cartProducts = titles ? titles : [];
     });
   }
 
@@ -67,17 +74,24 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  @Confirmable('title') 
-  RemoveProduct(product:Product) {
+  @Confirmable('title')
+  RemoveProduct(product: Product) {
     this.ps.DeleteProduct(product.id).subscribe(data => {
       this.RefreshProducts();
-    }); 
+    });
   }
 
   RefreshProducts() {
     this.ps.getProducts().subscribe(products => {
       this.productsList = products;
     });
+  }
+
+  cartProducts: string[] = [];
+  AddToCart(product: Product) {
+    this.cartProducts = [...this.cartProducts, product.title!];
+    let cart: CartInfo = { titles: this.cartProducts };
+    this.store.dispatch(cartAction({ cart }));
   }
 
 }

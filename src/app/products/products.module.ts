@@ -13,6 +13,8 @@ import { PrimengModule } from '../ui-libs/primeng.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsResolver } from '../shared/products.resolver';
 import { ProductDetailsResolver, ProductTypesResolver } from '../shared/product-details.resolver';
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from '../ngrxstore/cart.reducer';
 
 
 //products
@@ -42,7 +44,7 @@ const routes: Routes = [
     MaterialModule,
     SplashbiLibModule,
     RouterModule.forChild(routes),
-    HttpClientModule
+    HttpClientModule    
   ],
 })
 export class ProductsModule { }

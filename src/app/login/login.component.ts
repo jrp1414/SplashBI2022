@@ -32,6 +32,8 @@ export class LoginComponent {
     this.userService.login({ ...this.loginForm.value, grant_type: 'password' }).subscribe((data) => {
       this.localStorage.Set(data);
       this.router.navigate(['/home']);
+    }, (e)=>{
+      console.error(e);
     });
   }
 }

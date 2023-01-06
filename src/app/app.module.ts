@@ -21,6 +21,9 @@ import { ErrorInterceptor } from './shared/error.interceptor';
 import { WebWorkerComponent } from './web-worker/web-worker.component';
 import { LoginComponent } from './login/login.component';
 import { TokenInterceptor } from './shared/token.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './ngrxstore/cart.reducer';
+import { metaReducers } from './ngrxstore/meta.reducer';
 
 @NgModule({
   declarations: [
@@ -60,7 +63,8 @@ import { TokenInterceptor } from './shared/token.interceptor';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    StoreModule.forRoot({cartR:cartReducer}, {metaReducers})
   ],
   providers: [
     LoggerService,

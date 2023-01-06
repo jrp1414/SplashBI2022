@@ -4,13 +4,24 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-md-2">
+            <div *ngFor="let prod of cartProducts" class="col-md-1">
+                <div class="alert alert-primary" role="alert">
+                    <strong>{{prod}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
                 <ul class="list-group">
                     <li class="list-group-item"><a [routerLink]="['add']">Add Product</a></li>
                     <!-- <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id]" [queryParams]="{title:prod.title,rating:prod.rating}" >{{prod.title | uppercase}}</a></li> -->
                     <!-- <li class="list-group-item" *ngFor="let prod of productsList" ><a [routerLink]="[prod.id,{title:prod.title,rating:prod.rating}]" [fragment]="prod.title" >{{prod.title | uppercase}}</a></li> -->
-                    <li class="list-group-item" *ngFor="let prod of productsList"><a
-                            [routerLink]="[prod.id]">{{prod.title | uppercase}} </a>
+                    <li class="list-group-item" *ngFor="let prod of productsList">
+                        <button mat-icon-button (click)="AddToCart(prod)" type="button" color="primary"
+                            aria-label="Example icon button with a home icon">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <a [routerLink]="[prod.id]">{{prod.title | uppercase}} </a>
                         <button mat-icon-button (click)="RemoveProduct(prod)" type="button" color="warn"
                             aria-label="Example icon button with a home icon">
                             <mat-icon>delete</mat-icon>
@@ -18,7 +29,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <router-outlet></router-outlet>
             </div>
         </div>
