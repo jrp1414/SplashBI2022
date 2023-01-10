@@ -46,7 +46,8 @@ import { metaReducers } from './ngrxstore/meta.reducer';
     AdBannerComponent,
     AdDirective,
     WebWorkerComponent,
-    LoginComponent
+    LoginComponent,
+    FilterTempPipe
   ],
   imports: [
     BrowserModule,
