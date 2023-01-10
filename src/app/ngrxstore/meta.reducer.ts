@@ -1,12 +1,9 @@
-import { ActionReducer, MetaReducer } from "@ngrx/store";
+import { ActionReducer, INIT, MetaReducer } from "@ngrx/store";
+import { CartInfo } from "./cart.action";
 
-export interface RootState {
-    titles: string[];
-}
-
-export const hydrationMetaReducer = (reducer: ActionReducer<RootState>): ActionReducer<RootState> => {
+export const hydrationMetaReducer = (reducer: ActionReducer<CartInfo>): ActionReducer<CartInfo> => {
     return (state, action) => {
-        if (action.type == "INIT") {
+        if (action.type === INIT) {
             const storageValue = localStorage.getItem("state");
             if (storageValue) {
                 try {
@@ -15,10 +12,11 @@ export const hydrationMetaReducer = (reducer: ActionReducer<RootState>): ActionR
                     localStorage.removeItem("state");
                 }
             }
-            const nextState = reducer(state, action);
-            localStorage.setItem("state", JSON.stringify(nextState));
         }
-    }
+        const nextState = reducer(state, action);
+        localStorage.setItem("state", JSON.stringify(nextState));
+        return nextState;
+    };
 };
 
 export const metaReducers: MetaReducer[] = [

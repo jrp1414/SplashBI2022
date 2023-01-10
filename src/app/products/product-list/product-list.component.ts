@@ -89,7 +89,7 @@ export class ProductListComponent implements OnInit {
 
   cartProducts: string[] = [];
   AddToCart(product: Product) {
-    this.cartProducts = [...this.cartProducts, product.title!];
+    this.cartProducts = [...new Set([...this.cartProducts, product.title!])];
     let cart: CartInfo = { titles: this.cartProducts };
     this.store.dispatch(cartAction({ cart }));
   }
